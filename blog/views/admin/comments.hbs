@@ -1,0 +1,55 @@
+<div class="admin-users">
+    <div class="all-user" all="{{count}}">总文章数：{{count}}</div>
+    <div class="layui-table-header">
+        <table cellspacing="0" cellpadding="0" border="0" class="layui-table">
+            <tr>
+                <th width="14%">昵称</th>
+                <th width="12%">头像</th>
+                <th width="14%">性别</th>
+                <th width="14%">文章ID</th>
+                <th width="20%">评论内容</th>
+                <th width="14%">评论时间</th>
+                <th width="*">操作</th>
+            </tr>
+            {{#each _comm}}
+            <tr>
+                <td>{{this.nickname}}</td>
+                <td>
+                    <img class="user-head" src="{{this.imgsrc}}">
+                </td>
+                <td>{{this.sex}}</td>
+                <td>{{this._id}}</td>
+                <td>{{{this.text}}}</td>
+                <td>{{this.time}}</td>
+                <td>
+                    <i title="删除" onclick="home.del_comments(this);" class="admin-del admin-icon layui-icon">&#xe640;</i>
+                </td>
+            </tr>
+            {{/each}}
+        </table>
+    </div>
+    <div class="page" id="page"></div>
+</div>
+<script>
+    $(function(){
+        var ajax = home.ajax;
+        var layer = layui.layer;
+        home.page('page',{{count}},function(data,first){
+            if(first)
+                return;
+            ajax.admin_get_comments(data.curr,function(data){
+                var table = $('.layui-table');
+                if(data==null||data.length==0){
+                    var html = home.no_data();
+                    $(html).appendTo($('.layui-table-header'));
+                    $(table).hide();
+                    return false;
+                }
+                var _html = home.comment_page(data);
+                $(table).html($(_html));
+            },function(errorMsg){
+                layer.msg(errorMsg||'查询失败，请重试');
+            });
+        });
+    });
+</script>
