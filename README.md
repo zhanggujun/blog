@@ -6,7 +6,7 @@
 *	用户密码使用Crypto加密处理。
 ###	安装与运行
 *	本机需要安装Node与MongoDB。
-*	启动本机MongoDB数据库。
+*	启动本机MongoDB。
 *	Clone项目到本地。
 *	使用命令行进到项目根目录。
 *	npm install 安装依赖。
