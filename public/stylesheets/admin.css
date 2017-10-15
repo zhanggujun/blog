@@ -1,0 +1,85 @@
+@charset "utf-8";
+.page{margin-top:10px;text-align:center;}
+.admin-layout{
+    min-width:1100px;
+}
+.layui-nav-tree .layui-nav-item a{
+    text-align:center;
+    font-weight:300;
+}
+.layui-nav-tree .layui-nav-item a.sel{
+    background:#009688;
+}
+.admin-users .layui-table td,.admin-users .layui-table th{
+    text-align:center;
+    font-size:12px;
+}
+.admin-users .layui-table th{
+    font-weight:bold;
+}
+.admin-icon{
+    display:inline-block;
+    vertical-align:middle;
+    font-size:18px;
+    cursor:pointer;
+}
+.admin-del{
+    color:#f00;
+}
+.user-head{
+    width:50px;
+    height:50px;
+    border-radius:4px;
+    -webkit-border-radius:4px;
+}
+.no_data{
+    height:180px;
+    text-align:center;
+    background:#fff;
+}
+.no_data i{
+    display:block;
+    font-size:50px;
+    padding:40px 0 15px 0;
+}
+.layui-layout .layui-layer-btn .layui-layer-btn1.btn-disabled{
+    background: #999;
+    border:1px solid #999;
+    color: #fff;
+}
+.layui-layout .layui-layer-btn .layui-layer-btn1{
+    background:#009688;
+    border:1px solid #009688;
+    color:#fff;
+    font-size:13px;
+}
+.layui-layout .layui-layer-btn .layui-layer-btn0{
+    background:#ccc;
+    border:1px solid #ccc;
+    color:#fff;
+    font-size:13px;
+}
+.all-user{
+    padding:10px 0;
+    color:#009688;
+    border-bottom:1px solid #e2e2e2;
+}
+.layout_no_data{
+    width:90px;
+    height:90px;
+    text-align:center;
+    position:absolute;
+    top:50%;left:50%;
+    margin-left:-45px;
+    margin-top:-45px;
+}
+.layout_no_data i,.layout_no_data span{
+    display:block;
+    margin:10px;
+}
+.layout_no_data i{
+    font-size:50px;
+}
+.admin-edit{
+    color:#009688;
+}

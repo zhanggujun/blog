@@ -1,0 +1,93 @@
+<div class="blog-logo"></div>
+{{#if skill._id}}
+    <div class="blog-content">
+    <div class="blog-title">
+        <div class="title">{{skill.title}}</div>
+        <div class="small-title">
+            <span>——</span>
+            <span>{{skill.type}}</span>
+            <span>{{skill.user}}</span>
+            <span>{{skill.time}}</span>
+        </div>
+    </div>
+    <div class="blog-content">{{{skill.text}}}</div>
+    <div class="blog-editor">
+        <textarea id="textarea"></textarea>
+    </div>
+    <div class="blog-btn-box">
+        <a class="layui-btn">保存</a>
+    </div>
+    <div class="blog-user-list">
+        <!--
+        <div class="blog-one-user">
+            <div class="one-user-l">
+                <img src="/images/night.gif" alt="">
+            </div>
+            <div class="one-user-r">
+                <div class="one-user-title">
+                    <span class="user-name">我是用户名</span>
+                    <span class="layui-icon">&#xe662;</span>
+                    <div class="user-time">2017-01-01</div>
+                </div>
+                <div class="one-user-con">我是评论</div>
+            </div>
+        </div>
+        <div class="blog-one-user">
+            <div class="one-user-l">
+                <img src="/images/night.gif" alt="">
+            </div>
+            <div class="one-user-r">
+                <div class="one-user-title">
+                    <span class="user-name">我是用户名</span>
+                    <span class="layui-icon">&#xe661;</span>
+                    <div class="user-time">2017-01-01</div>
+                </div>
+                <div class="one-user-con">我是评论</div>
+            </div>
+        </div>
+        -->
+    </div>
+    <div class="page" id="page"></div>
+</div>
+{{else}}
+    <div class="index_no_data">
+        <i class="layui-icon">&#xe628;</i>
+        <span>没有数据</span>
+    </div>
+{{/if}}
+<script>
+    $(function(){
+        var ajax = home.ajax;
+        var editor = home.editor('textarea');
+        $('.layui-btn').click(function(){
+            var user = users.userId;
+            if(user==''||user==null)
+                return home.showInfo('您还未登陆，请登陆');
+            var _this = this;
+            if(home.disabled(this))
+                return home.showInfo('数据提交中，请勿重复提交');
+            var text = editor.getContent(editor.index);
+            if(text.length==0)
+                return home.showInfo('请输入评论');
+            var data = {
+                skillId:'{{skill._id}}',
+                userId:users.userId,
+                text:text
+            };
+            home.setButton(this,true);
+            ajax.index_save(data,function(data){
+                var html = home.create_comment(data);
+                $(html).prependTo($('.blog-user-list'));
+                $('.blog-user-list').show();
+                home.showInfo('评论成功');
+                home.setButton(_this,false);
+            },function(errorMsg){
+                home.showInfo(errorMsg||'评论失败，请重试');
+                home.setButton(_this,false);
+            });
+        });
+        //评论分页;
+        var skillId = '{{skill._id}}';
+        home.get_index_comm('page',skillId);
+    });
+</script>
